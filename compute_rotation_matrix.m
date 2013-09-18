@@ -1,4 +1,4 @@
-function [ s, phi ] = compute_rotation_matrix(R)
+function [ R ] = compute_rotation_matrix(phi, s)
 % Computes the rotation matrix corresponding to angle phi and axis vector s.
 
 x = s(1,1);
