@@ -5,7 +5,7 @@
 
 \begin{document}
 \title{CS280 Homework 1}
-\author{Richard Hwang}
+\author{Richard Hwang and Achal Dave}
 \maketitle
 
 \section{Perspective Projection}
@@ -34,7 +34,54 @@
     \frac{e_yd_xe_z}{e_z} + d_xe_y - e_xd_y= 0$$
     $$0 = 0$$
 
+    Thus, we have confirmed that the vanishing point of any line on a plane
+    must lie on the plane's vanishing line.
+
 \item
+    The eccentricity of an ellipse in a cone can be calculated as $\frac{\sin(\alpha)}{\sin(\beta)}$,
+    where $\alpha$ is as depicted below (we will look at $\beta$ after).
+
+    \includegraphics[width=240px]{./../img/alpha.jpg}
+
+    Specifically, $\alpha$ is the angle of the image plane from the $\vec{P}$,
+    which is perpendicular to the ray from the origin to the center of the sphere.
+    $\beta$ is the angle of the cone's slant from that same line.
+
+    Let's calculate $\alpha$ first. Since the image plane is perpendicular to the
+    $\textbf{Z}$ axis, and $\vec{p}$ is perpendicular to $\vec{OC}$, it's easy to
+    see that the angle between $\vec{OC}$ and the $\textbf{Z}$ axis is also
+    $\alpha$. 
+
+    \begin{align*}
+        \sin(\alpha) &= \frac{X}{\sqrt{X^2 + Z^2}} \\
+    \end{align*}
+
+    Next, let's look at $\beta$.
+
+    \includegraphics[width=240px]{./../img/beta.jpg}
+
+    From the image, we see that $\beta$ and $\beta_1$ are complementary. We can
+    calculate $\beta_1$ first. 
+
+    \begin{align*}
+        \cos(\beta_1) = \frac{\|\vec{OA}\|}{\|\vec{OC}\|} \\
+        &= \frac{\sqrt{X^2 + Z^2 - r^2}}{\sqrt{X^2 + Z^2}} \\
+        \\
+    \end{align*}
+
+    Furthermore,
+    \begin{align*}
+        \beta &= 90 - \beta_1 \\
+        \therefore \sin(\beta) &= \cos(\beta_1) \\
+                               &= \frac{\sqrt{X^2 + Z^2 - r^2}}{\sqrt{X^2 + Z^2}}
+    \end{align*}
+
+    Hence, the eccentricity of the ellipse is
+    \begin{align*}
+        e &= \frac{\sin(\alpha)}{\sin(\beta)} \\
+          &= \frac{X}{\sqrt{X^2 + Z^2 - r^2}} \\
+    \end{align*}
+
 \item
     Define $\theta$ as the angle between the observer's body and the point.
 
@@ -119,8 +166,6 @@
     \includegraphics[width=0.5\linewidth]{./../img/TIP_2.jpg}
     \includegraphics[width=0.5\linewidth]{./../img/TIP_2_columns.png}
     \includegraphics[width=0.5\linewidth]{./../img/TIP_2_rafters.png}
-    % TODO bad
-    \includegraphics[width=0.5\linewidth]{./../img/TIP_2_rafters.png}
 
 \end{enumerate}
 \newpage
@@ -195,7 +240,34 @@
     $$E = \begin{pmatrix}0&0.7857&0\\-0.7857&0&0.75\\0&0&1\end{pmatrix}$$
 
 \item
+    The function is in compute\_rotation\_matrix.m.
+    From finding the eigenvalues and eigenvectors of ${\bf R}$, we see that
+    the eigenvector paired with the postive, purely real eigenvalue is $s$.
+
+    Eigenvalues and eigenvectors.  The eigenvector corresponding to the
+    positive eigenvalue is the normalized axis of rotation.
+
+    \includegraphics[height=5in]{./../img/rotation_matrix_eig.png}
+
+    $cos\phi$ formula.  We tried a couple values out...
+
+    \includegraphics[height=4in]{./../img/rotation_matrix_trace.png}
+
+    Applying rotation to some sample points...
+
+    \includegraphics[height=4in]{./../img/rotation_matrix_applied.png}
+
 \item
+    The function is in compute\_phi\_axis.m. %We use the hint.
+    %$${\bf R} - {\bf R}^T = \begin{pmatrix}0&-2w_zsin\theta&2w_ysin\theta\\
+    %2w_zsin\theta&0&-2w_xsin\theta\\
+    %-2w_ysin\theta&2w_xsin\theta&0\end{pmatrix}$$
+    %$${\bf R} - {\bf R}^T = (2sin\phi){\bf \hat{s}}$$
+
+    Recall, from part 4 that the eigenvector of $R$ corresponding to the
+    purely real, postive eigenvalue {\it is} the axis of rotation of $R$.
+    Also, we know $\phi$ from $cos\phi = \frac{1}{2}\{trace({\bf R}) - 1\}.$
+
 \end{enumerate}
 
 \end{document}
